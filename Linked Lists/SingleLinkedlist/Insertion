@@ -1,0 +1,77 @@
+//Insertion at various placesin singled linked list
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+    public:
+    int data;
+    Node* next;
+    
+    Node(int data){
+        this -> data = data;
+        this -> next =  NULL;
+    }
+    
+};
+
+void print(Node* &head){
+    Node* temp = head;
+    while(temp != NULL){
+        cout<< temp->data<< endl;
+        temp = temp -> next;
+    }
+}
+void insertAtBeginning(Node* &head,int d){
+Node*temp = new Node(d);
+temp ->next = head;
+head = temp;
+}
+
+void insertAtLast(Node* &tail,int d){
+    Node* temp = new Node(d);
+    tail -> next = temp;
+    tail = tail->next;
+}
+void insertAtMiddle(Node* head, int position, int d){
+    if(position == 1){
+        insertAtBeginning(head,d);
+    }else{
+        
+        Node*temp = head;
+        int count = 1;
+        while(count<position-1){
+            temp = temp -> next;
+            count++;
+        }
+        Node* nodeToInsert = new  Node(d);
+        nodeToInsert -> next = temp ->next;
+        temp ->next = nodeToInsert;
+        
+        
+    }
+}
+int main() {
+    Node* n1 = new Node(10);
+    Node* n2 = new Node(20);
+    Node* n3 = new Node(30);
+    n1-> next = n2;
+    n2-> next = n3;
+    n3->next = NULL;
+    Node*head = n1;
+    Node*tail = n3;
+    
+
+   cout<<"Without Any Insertion"<<endl ;
+   print(head);
+    insertAtBeginning(head,20);
+    cout<<"Insertion At start"<<endl;
+    print(head);
+    
+    insertAtLast(tail, 40);
+    cout<< "Insertion At last"<<endl;
+    print(head);
+    insertAtMiddle(head,3, 70);
+    cout<<"Insertion At any Position "<<endl;
+    print(head);
+    return 0;
+
+}
