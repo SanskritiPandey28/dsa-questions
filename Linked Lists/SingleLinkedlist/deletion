@@ -1,0 +1,57 @@
+// deletion in singly linked list atvarious position
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int data){
+        this->data = data;
+        this->next = NULL;
+    }
+
+    ~Node(){
+        cout << "Deleting node with data " << data << endl;
+    }
+};
+void deleteNode(Node* &head, Node* &tail, int position) {
+    if(head == NULL) {
+        cout << "List is empty, nothing to delete." << endl;
+        return;
+    }
+
+    Node* current = head;
+    Node* previous = NULL;
+
+    // Deleting the head node
+    if(position == 1) {
+        head = head->next;
+        current->next = NULL; // optional, break link
+        delete current;
+
+        // If list becomes empty after deletion, update tail
+        if(head == NULL)
+            tail = NULL;
+        return;
+    }
+
+    int count = 1;
+    while(count < position && current != NULL) {
+        previous = current;
+        current = current->next;
+        count++;
+    }
+
+    // Check if position is valid
+    if(current == NULL) {
+        cout << "Position out of range." << endl;
+        return;
+    }
+
+    // If deleting last node, update tail
+    if(current->next == NULL)
+        tail = previous;
+
+    previous->next = current->next;
+    current->next = NULL; // optional, break link
+    delete current;
+}
