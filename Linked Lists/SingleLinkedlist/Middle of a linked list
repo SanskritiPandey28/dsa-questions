@@ -1,0 +1,37 @@
+
+class Node {
+    int data;
+    Node* next;
+
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+
+};
+
+class Solution {
+private:
+int getLength(Node* head){
+    Node* temp = head;
+        int length = 0;
+        while(temp!=NULL){
+            length++;
+            temp = temp-> next;
+        }
+        return length;
+}
+  public:
+    int getMiddle(Node* head) {
+        int count = 0; 
+        int length = getLength(head);
+        int middle = length/2;
+        Node* temp = head;
+        
+        while(count< middle){
+            temp = temp-> next;
+            count++;
+        }
+        return temp-> data;
+    }
+};
