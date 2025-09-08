@@ -35,3 +35,17 @@ int getLength(Node* head){
         return temp-> data;
     }
 };
+//hare tortoise method
+ Node* slowptr = head;
+    Node* fastptr = head;
+
+    while (fastptr != NULL && fastptr->next != NULL) {
+
+        // move the fast pointer by two nodes
+        fastptr = fastptr->next->next;
+
+        // move the slow pointer by one node
+        slowptr = slowptr->next;
+    }
+
+    return slowptr->data;
